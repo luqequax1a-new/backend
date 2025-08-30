@@ -1,0 +1,10 @@
+{
+    "name": "Test Product",
+    "slug": "test-product",
+    "sku": "TEST001",
+    "unit_id": 1,
+    "price": 99.99,
+    "tax_rate": 0.18,
+    "stock_qty": 100,
+    "is_active": true
+}
