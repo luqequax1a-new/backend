@@ -1,61 +1,261 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Backend - Product Management API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Bu proje, Laravel framework'ü kullanılarak geliştirilmiş bir ürün yönetim API'sidir. Otomatik slug üretimi, ürün kopyalama ve kapsamlı ürün yönetimi özellikleri içerir.
 
-## About Laravel
+## 🚀 Özellikler
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### ✨ Slug Yönetimi
+- **Otomatik Slug Üretimi**: Ürün adından otomatik olarak SEO dostu slug oluşturma
+- **Benzersizlik Kontrolü**: Aynı slug'dan varsa otomatik olarak sayı ekleme (örn: `urun-adi`, `urun-adi-2`)
+- **Özel Slug Desteği**: Manuel slug girişi imkanı
+- **Güncelleme Koruması**: Ürün güncellenirken slug'ın korunması
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 📦 Ürün Yönetimi
+- **CRUD İşlemleri**: Ürün oluşturma, okuma, güncelleme, silme
+- **Ürün Kopyalama**: Mevcut ürünleri kopyalama özelliği
+- **Kategori İlişkileri**: Çoklu kategori desteği
+- **Resim Yönetimi**: Ürün resimlerini yönetme
+- **Marka ve Mağaza İlişkileri**: Ürünleri marka ve mağazalarla ilişkilendirme
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🔧 Teknik Özellikler
+- **RESTful API**: Standart REST API yapısı
+- **Form Request Validation**: Ayrı validation sınıfları
+- **Helper Sınıfları**: Yeniden kullanılabilir Slugger helper
+- **Database Migrations**: Veritabanı yapısı yönetimi
+- **Seeders**: Test verileri
 
-## Learning Laravel
+## 📋 Gereksinimler
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP >= 8.1
+- Laravel >= 10.x
+- MySQL >= 5.7
+- Composer
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🛠️ Kurulum
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Projeyi Klonlayın
+```bash
+git clone https://github.com/luqequax1a-new/backend.git
+cd backend
+```
 
-## Laravel Sponsors
+### 2. Bağımlılıkları Yükleyin
+```bash
+composer install
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 3. Ortam Dosyasını Yapılandırın
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-### Premium Partners
+### 4. Veritabanını Yapılandırın
+`.env` dosyasında veritabanı bilgilerini güncelleyin:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=fabric
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 5. Veritabanını Oluşturun ve Migrate Edin
+```bash
+php artisan migrate
+php artisan db:seed
+```
 
-## Contributing
+### 6. Sunucuyu Başlatın
+```bash
+php artisan serve
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 📚 API Dokümantasyonu
 
-## Code of Conduct
+### Base URL
+```
+http://localhost:8000/api/admin/v1
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 🛍️ Ürün Endpoint'leri
 
-## Security Vulnerabilities
+#### Tüm Ürünleri Listele
+```http
+GET /products
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### Ürün Detayı
+```http
+GET /products/{id}
+```
 
-## License
+#### Yeni Ürün Oluştur
+```http
+POST /products
+Content-Type: application/json
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+{
+    "name": "Örnek Ürün",
+    "description": "Ürün açıklaması",
+    "price": 99.99,
+    "stock_quantity": 100,
+    "sku": "SKU001",
+    "status": "active",
+    "slug": "ornek-urun" // Opsiyonel - belirtilmezse otomatik oluşturulur
+}
+```
+
+#### Ürün Güncelle
+```http
+PATCH /products/{id}
+Content-Type: application/json
+
+{
+    "name": "Güncellenmiş Ürün Adı",
+    "price": 149.99
+}
+```
+
+#### Ürün Sil
+```http
+DELETE /products/{id}
+```
+
+#### Ürün Kopyala
+```http
+POST /products/{id}/duplicate
+```
+
+#### Ürün Durumunu Güncelle
+```http
+PATCH /products/{id}/status
+Content-Type: application/json
+
+{
+    "status": "inactive"
+}
+```
+
+## 🏗️ Proje Yapısı
+
+### Önemli Dosyalar
+
+```
+app/
+├── Http/
+│   ├── Controllers/
+│   │   └── Admin/
+│   │       └── ProductController.php     # Ana ürün controller'ı
+│   └── Requests/
+│       ├── ProductStoreRequest.php       # Ürün oluşturma validation
+│       └── ProductUpdateRequest.php      # Ürün güncelleme validation
+├── Models/
+│   ├── Product.php                       # Ürün modeli
+│   ├── Category.php                      # Kategori modeli
+│   ├── ProductImage.php                  # Ürün resim modeli
+│   ├── Brand.php                         # Marka modeli
+│   └── Store.php                         # Mağaza modeli
+└── Support/
+    └── Slugger.php                       # Slug helper sınıfı
+
+database/
+├── migrations/                           # Veritabanı migration'ları
+└── seeders/                             # Test verileri
+
+routes/
+└── api.php                              # API route'ları
+```
+
+### Slugger Helper Sınıfı
+
+`app/Support/Slugger.php` sınıfı slug işlemleri için kullanılır:
+
+```php
+use App\Support\Slugger;
+
+// Basit slug oluşturma
+$slug = Slugger::make('Örnek Ürün Adı'); // 'ornek-urun-adi'
+
+// Benzersiz slug oluşturma
+$uniqueSlug = Slugger::unique('Örnek Ürün Adı', Product::class); // 'ornek-urun-adi-2'
+
+// Slug varlığını kontrol etme
+$exists = Slugger::exists('ornek-slug', Product::class); // true/false
+```
+
+## 🧪 Test Etme
+
+### Ürün Oluşturma Testi
+```bash
+# PowerShell
+Invoke-WebRequest -Uri "http://localhost:8000/api/admin/v1/products" -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"name":"Test Ürünü","description":"Test açıklaması","price":99.99,"stock_quantity":50,"sku":"TEST001","status":"active"}'
+```
+
+### Ürün Kopyalama Testi
+```bash
+# PowerShell
+Invoke-WebRequest -Uri "http://localhost:8000/api/admin/v1/products/1/duplicate" -Method POST
+```
+
+## 🔧 Geliştirme
+
+### Cache Temizleme
+```bash
+php artisan route:clear
+php artisan config:clear
+php artisan cache:clear
+```
+
+### Yeni Migration Oluşturma
+```bash
+php artisan make:migration create_table_name
+```
+
+### Yeni Model Oluşturma
+```bash
+php artisan make:model ModelName -m
+```
+
+## 📝 Veritabanı Yapısı
+
+### Products Tablosu
+- `id` - Primary key
+- `name` - Ürün adı
+- `slug` - SEO dostu URL (benzersiz)
+- `description` - Ürün açıklaması
+- `price` - Fiyat
+- `stock_quantity` - Stok miktarı
+- `sku` - Stok kodu
+- `status` - Durum (active/inactive)
+- `brand_id` - Marka ID (foreign key)
+- `store_id` - Mağaza ID (foreign key)
+- `created_at` - Oluşturulma tarihi
+- `updated_at` - Güncellenme tarihi
+
+### İlişkiler
+- **Categories**: Many-to-Many (product_categories tablosu)
+- **Images**: One-to-Many (product_images tablosu)
+- **Brand**: Many-to-One
+- **Store**: Many-to-One
+
+## 🤝 Katkıda Bulunma
+
+1. Fork yapın
+2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
+3. Değişikliklerinizi commit edin (`git commit -m 'Add amazing feature'`)
+4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
+5. Pull Request oluşturun
+
+## 📄 Lisans
+
+Bu proje MIT lisansı altında lisanslanmıştır.
+
+## 📞 İletişim
+
+Proje hakkında sorularınız için GitHub Issues kullanabilirsiniz.
+
+---
+
+**Not**: Bu README dosyası projenin mevcut durumunu yansıtmaktadır. Yeni özellikler eklendikçe güncellenecektir.
